@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RouletteComponent } from './inapps/roulette/roulette.component';
-import { SpinComponent } from './inapps/spin/spin.component';
+import { SpinComponent } from './inapps/spin copy/spin.component';
 
 const routes: Routes = [
   { path: 'roulette', component: RouletteComponent },
