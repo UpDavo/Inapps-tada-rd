@@ -10,6 +10,10 @@ export class CatchingGameComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+    var discounts = [
+      { descripcion: '5% de descuento', code: 'asdad', score: [6, 8] },
+      { descripcion: '10% de descuento', code: 'kjas', score: [1, 5] },
+    ];
     var game = document.querySelector('.game') as HTMLElement;
     var basket = document.querySelector('.basket') as HTMLElement;
     var beers = document.querySelector('.beers') as HTMLElement;
@@ -118,24 +122,31 @@ export class CatchingGameComponent implements OnInit {
         img.style.maxWidth = '7em';
       }
 
-      var endgame =
-        lives == 0
-          ? {
+      function getEndgame() {
+        switch (lives) {
+          case 0:
+            let discoiuntId = discounts.findIndex(
+              (car) => score >= car.score[0] && score <= car.score[1]
+            );
+
+            return {
               title:
                 "<h3 style='font-size: 2.2rem !important; font-family: Bright !important; color: #270a45;'>¡Oh no!</h3>",
-              html: `<h3 style='font-size:0.9rem;font-family: Monserrat !important;'>Estuviste muy cerca de ganar tu retornable 😢 <br><br> <b>Te has quedado sin vidas, inténtalo el día de mañana</b></h3>`,
+              html: `<h3 style='font-size:0.9rem;font-family: Monserrat !important;'>Se han terminado tus intentos 😢 <br><br> <b>Tu puntuación es de ${score} y tu cupón es ${discounts[discoiuntId].code}</b></h3>`,
               imageUrl: '/assets/img/logo_tada.png',
               width: '23em',
               imageWidth: '12rem',
               imageHeight: '5rem',
               imageAlt: 'Custom image',
               showCloseButton: false,
+              allowOutsideClick: false,
               showConfirmButton: false,
-            }
-          : {
+            };
+          default:
+            return {
               title:
                 "<h3 style='font-size: 2.2rem !important; font-family: Bright !important; color: #270a45;'>¡Oh no!</h3>",
-              html: `<h3 style='font-size:0.9rem;font-family: Monserrat !important;'>Estuviste muy cerca de ganar tu retornable 😢 <br><br> <b>Tienes ${
+              html: `<h3 style='font-size:0.9rem;font-family: Monserrat !important;'>Estuviste muy cerca de ganar continúa jugando para saber tu puntaje final <br><br> <b>Tienes ${
                 lives != 1 ? lives + ' Vidas' : lives + ' Vida'
               }</b></h3>`,
               imageUrl: '/assets/img/logo_tada.png',
@@ -144,6 +155,7 @@ export class CatchingGameComponent implements OnInit {
               imageHeight: '5rem',
               imageAlt: 'Custom image',
               showCloseButton: false,
+              allowOutsideClick: false,
               showConfirmButton: true,
               focusConfirm: false,
               confirmButtonText:
@@ -151,6 +163,8 @@ export class CatchingGameComponent implements OnInit {
               confirmButtonAriaLabel: 'Thumbs up, great!',
               confirmButtonColor: '#270a45',
             };
+        }
+      }
 
       beer.appendChild(img);
       beers.appendChild(beer);
@@ -166,33 +180,34 @@ export class CatchingGameComponent implements OnInit {
           clearInterval(fallInterval);
           score++;
           score_div.textContent = 'Puntuación: ' + score + ' - Vidas: ' + lives;
-          if (score == 5) {
-            clearInterval(fallInterval);
-            clearTimeout(beerTimeout);
-            Swal.fire({
-              title:
-                "<h3 style='font-size: 2.2rem !important; font-family: Bright !important; color: #270a45;'>¡Felicidades, ganaste! 🎩</h3>",
-              imageUrl: '/assets/img/logo_tada.png',
-              width: '21em',
-              imageWidth: '12rem',
-              imageHeight: '5rem',
-              imageAlt: 'Custom image',
-              html: "<h3 style='font-size:0.9rem;font-family: Monserrat !important;'>Disfruta de una botella pilsener o nuestra siembra litro gratis usando el cupón:</h2><br><h3 style='font-family: Bright !important;font-size: 2.6rem;color: #270a45;'>YORETORNO</h3>",
-              showCloseButton: false,
-              showConfirmButton: true,
-              confirmButtonText: '¡A comprar!',
-              confirmButtonColor: '#270a45',
-            });
-          }
+          // if (score == 5) {
+          //   clearInterval(fallInterval);
+          //   clearTimeout(beerTimeout);
+          //   Swal.fire({
+          //     title:
+          //       "<h3 style='font-size: 2.2rem !important; font-family: Bright !important; color: #270a45;'>¡Felicidades, ganaste! 🎩</h3>",
+          //     imageUrl: '/assets/img/logo_tada.png',
+          //     width: '21em',
+          //     imageWidth: '12rem',
+          //     imageHeight: '5rem',
+          //     imageAlt: 'Custom image',
+          //     html: "<h3 style='font-size:0.9rem;font-family: Monserrat !important;'>Disfruta de una botella pilsener o nuestra siembra litro gratis usando el cupón:</h2><br><h3 style='font-family: Bright !important;font-size: 2.6rem;color: #270a45;'>YORETORNO</h3>",
+          //     showCloseButton: false,
+          //     showConfirmButton: true,
+          //     confirmButtonText: '¡A comprar!',
+          //     confirmButtonColor: '#270a45',
+          //   });
+          // }
         }
 
         if (beerBottom < basketBottom && garbage == false) {
           beers.removeChild(beer);
           clearInterval(fallInterval);
           clearTimeout(beerTimeout);
+          let endgame = getEndgame();
           Swal.fire(endgame).then((result) => {
             if (result.isConfirmed) {
-              score = 0;
+              // score = 0;
               lives -= 1;
               score_div.textContent =
                 'Puntuación: ' + score + ' - Vidas: ' + lives;
@@ -220,9 +235,10 @@ export class CatchingGameComponent implements OnInit {
           beers.removeChild(beer);
           clearInterval(fallInterval);
           clearTimeout(beerTimeout);
+          let endgame = getEndgame();
           Swal.fire(endgame).then((result) => {
             if (result.isConfirmed) {
-              score = 0;
+              // score = 0;
               lives -= 1;
               score_div.textContent =
                 'Puntuación: ' + score + ' - Vidas: ' + lives;
@@ -269,6 +285,7 @@ export class CatchingGameComponent implements OnInit {
       width: '23em',
       imageAlt: 'instrucciones',
       showCloseButton: false,
+      allowOutsideClick: false,
       showConfirmButton: true,
       focusConfirm: false,
       confirmButtonText:

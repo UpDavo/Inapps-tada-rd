@@ -1,54 +1,45 @@
 <style>
-  .swal2-popup {
-    font-family: Bright !important;
-  }
+    .swal2-popup {
+        font-family: Bright !important;
+    }
 </style>
 
 <div class="countdown box overflow-y-hidden h-screen">
-  <div class="box-inner">
-    <div class="container text-center" style="margin-top: 1rem">
-      <div class="titulos">
-        <img class="mt-1" src="/assets/img/platano_titulo.png" alt="logo" />
-        <h2
-          class="text-[#6f4b98] text-2xl uppercase tracking-widest"
-          style="font-family: Montserrat; font-size: 14px"
-          id="score"
-          #score
-        >
-          Puntuación: 0 - Vidas: 2
-        </h2>
-      </div>
+    <div class="box-inner">
+        <div class="container text-center" style="margin-top: 1rem">
+            <div class="titulos">
+                <img class="mt-1" src="/assets/img/platano_titulo.png" alt="logo" />
+                <h2 class="text-[#6f4b98] text-2xl uppercase tracking-widest font-bold" style="font-family: Montserrat; font-size: 14px" id="score" #score>
+                    Puntuación: 0 - Vidas: 2
+                </h2>
+            </div>
 
-      <div class="game" #game>
-        <div class="beers" #beers></div>
-        <div class="danger-line" #dangerLine></div>
-        <div class="basket" #basket>
-          <img
-            src="/assets/img/sombrero.png"
-            alt="sombrero"
-            style="
+            <div class="game" #game>
+                <div class="beers" #beers></div>
+                <div class="danger-line" #dangerLine></div>
+                <div class="basket" #basket>
+                    <img src="/assets/img/sombrero.png" alt="sombrero" style="
               max-width: 7em;
               height: auto;
               position: absolute;
               left: -12px;
               top: -41px;
-            "
-          />
-        </div>
-      </div>
+            " />
+                </div>
+            </div>
 
-      <div class="demo" id="loader" #loader>
-        <div class="demo__colored-blocks">
-          <div class="demo__colored-blocks-rotater">
-            <div class="demo__colored-block"></div>
-            <div class="demo__colored-block"></div>
-            <div class="demo__colored-block"></div>
-          </div>
-          <div class="demo__colored-blocks-inner"></div>
-          <div class="demo__text">¡Comienza!</div>
-        </div>
-        <div class="demo__inner">
-          <svg class="demo__numbers" viewBox="0 0 100 100">
+            <div class="demo" id="loader" #loader>
+                <div class="demo__colored-blocks">
+                    <div class="demo__colored-blocks-rotater">
+                        <div class="demo__colored-block"></div>
+                        <div class="demo__colored-block"></div>
+                        <div class="demo__colored-block"></div>
+                    </div>
+                    <div class="demo__colored-blocks-inner"></div>
+                    <div class="demo__text">¡Comienza!</div>
+                </div>
+                <div class="demo__inner">
+                    <svg class="demo__numbers" viewBox="0 0 100 100">
             <defs>
               <path class="demo__num-path-1" d="M40,28 55,22 55,78" />
               <path
@@ -74,13 +65,13 @@
                                    l0,-61 L40,28"
             />
           </svg>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <div style="visibility: hidden">
-    <img src="/assets/img/bomb.png" alt="" />
-    <img src="/assets/img/platano.png" alt="" />
-    <img src="/assets/img/frito.png" alt="" />
-  </div>
+    <div style="visibility: hidden">
+        <img src="/assets/img/bomb.png" alt="" />
+        <img src="/assets/img/platano.png" alt="" />
+        <img src="/assets/img/frito.png" alt="" />
+    </div>
 </div>
