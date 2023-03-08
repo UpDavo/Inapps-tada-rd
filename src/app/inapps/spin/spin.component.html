@@ -12,40 +12,40 @@
         style="margin-top: 3rem"
       >
         <div id="app">
-          <div class="doors">
-            <div class="door">
-              <div class="boxes">
-                <!-- <div class="item_box">?</div> -->
-              </div>
-            </div>
-
-            <div class="door">
-              <div class="boxes">
-                <!-- <div class="item_box">?</div> -->
-              </div>
-            </div>
-
-            <div class="door">
-              <div class="boxes">
-                <!-- <div class="item_box">?</div> -->
-              </div>
-            </div>
+          <div>
+            <h2 id="vidas">
+              {{
+                lives != 0
+                  ? "¡Juega con tu suerte! | Intentos: " + lives
+                  : "¡Último intento!"
+              }}
+            </h2>
           </div>
-
+          <section id="Slots">
+            <div id="slot1" class="a1"></div>
+            <div id="slot2" class="a1"></div>
+            <div id="slot3" class="a1"></div>
+          </section>
           <div>
             <button
-              style="font-size: 1rem; margin-top: 1.5rem"
+              style="font-size: 1rem; margin-top: 2rem"
               class="button-85"
-              id="spinner"
-              (click)="spin()"
+              id="Gira"
+              (click)="doSlot()"
             >
               Gira la Ruleta
             </button>
           </div>
-
-          <!-- <p class="info"></p> -->
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<div style="visibility: hidden" class="a1"></div>
+<div style="visibility: hidden" class="a2"></div>
+<div style="visibility: hidden" class="a3"></div>
+<div style="visibility: hidden" class="a4"></div>
+<div style="visibility: hidden" class="a5"></div>
+<div style="visibility: hidden" class="a6"></div>
+<div style="visibility: hidden" class="a7"></div>
