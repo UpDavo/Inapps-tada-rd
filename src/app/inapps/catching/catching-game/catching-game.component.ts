@@ -11,6 +11,9 @@ export class CatchingGameComponent implements OnInit {
 
   ngOnInit(): void {
     var discounts = [
+      { descripcion: '5% de descuento', code: 'asdad', score: [21, 40] },
+      { descripcion: '5% de descuento', code: 'asdad', score: [13, 20] },
+      { descripcion: '5% de descuento', code: 'asdad', score: [9, 12] },
       { descripcion: '5% de descuento', code: 'asdad', score: [6, 8] },
       { descripcion: '10% de descuento', code: 'kjas', score: [1, 5] },
     ];
@@ -122,13 +125,37 @@ export class CatchingGameComponent implements OnInit {
         img.style.maxWidth = '7em';
       }
 
+      function increaseDifficulty(): number {
+        let velocity = 20;
+        if (score >= 0 && score <= 5) {
+          velocity = 20;
+        } else {
+          if (score > 5 && score <= 10) {
+            velocity = 16;
+          } else {
+            if (score > 10 && score <= 15) {
+              velocity = 12;
+            } else {
+              if (score > 15 && score <= 20) {
+                velocity = 9;
+              } else {
+                velocity = 7;
+              }
+            }
+          }
+        }
+        return velocity;
+      }
+
       function getEndgame() {
         switch (lives) {
           case 0:
             let discoiuntId = discounts.findIndex(
               (car) => score >= car.score[0] && score <= car.score[1]
             );
-
+            document.removeEventListener('keydown', keyDownHandler);
+            document.removeEventListener('mousemove', mouseMoveHandler);
+            document.removeEventListener('touchmove', touchMoveHandler);
             return {
               title: `<h3 style='font-size: 1.3rem !important; font-family: Monserrat !important; color: #6f4b98; text-transform: uppercase; font-weight: lighter;'>${discounts[discoiuntId].descripcion}</h3>`,
               html: `<h3 style='font-size:2rem;font-family: Monserrat !important; font-weight:bold; color: #6f4b98; text-transform: uppercase; margin-bottom: 18px;'>${discounts[discoiuntId].code}</h3><h4 style='font-size:1rem;font-family: Monserrat !important; color: #6f4b98; text-transform: uppercase; margin-bottom: 18px;'>Tu puntaje es de ${score}<h4>`,
@@ -266,7 +293,7 @@ export class CatchingGameComponent implements OnInit {
         beer.style.bottom = beerBottom + 'px';
         beer.style.left = beerLeft + 'px';
       }
-      var fallInterval = setInterval(fallDownBeer, 20);
+      var fallInterval = setInterval(fallDownBeer, increaseDifficulty());
       var beerTimeout = setTimeout(generateBeers, 2000);
     }
 
