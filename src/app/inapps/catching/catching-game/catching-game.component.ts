@@ -130,17 +130,17 @@ export class CatchingGameComponent implements OnInit {
             );
 
             return {
-              title:
-                "<h3 style='font-size: 2.2rem !important; font-family: Bright !important; color: #270a45;'>¡Oh no!</h3>",
-              html: `<h3 style='font-size:0.9rem;font-family: Monserrat !important;'>Se han terminado tus intentos 😢 <br><br> <b>Tu puntuación es de ${score} y tu cupón es ${discounts[discoiuntId].code}</b></h3>`,
-              imageUrl: '/assets/img/logo_tada.png',
+              title: `<h3 style='font-size: 1.3rem !important; font-family: Monserrat !important; color: #6f4b98; text-transform: uppercase; font-weight: lighter;'>${discounts[discoiuntId].descripcion}</h3>`,
+              html: `<h3 style='font-size:2rem;font-family: Monserrat !important; font-weight:bold; color: #6f4b98; text-transform: uppercase; margin-bottom: 18px;'>${discounts[discoiuntId].code}</h3><h4 style='font-size:1rem;font-family: Monserrat !important; color: #6f4b98; text-transform: uppercase; margin-bottom: 18px;'>Tu puntaje es de ${score}<h4>`,
+              imageUrl: '/assets/img/felicidades.png',
               width: '23em',
-              imageWidth: '12rem',
-              imageHeight: '5rem',
               imageAlt: 'Custom image',
               showCloseButton: false,
               allowOutsideClick: false,
-              showConfirmButton: false,
+              showConfirmButton: true,
+              focusConfirm: false,
+              confirmButtonText: 'COMPRAR YA',
+              confirmButtonColor: '#6f4b98',
             };
           default:
             return {
@@ -291,7 +291,7 @@ export class CatchingGameComponent implements OnInit {
       confirmButtonText:
         "<h3 style='font-family: Monserrat !important;'>¡Jugar!<h3>",
       confirmButtonAriaLabel: '¡Jugar!',
-      confirmButtonColor: '#270a45',
+      confirmButtonColor: '#6f4b98',
     }).then((result) => {
       if (result.isConfirmed) {
         score = 0;
