@@ -1215,3 +1215,12 @@ video {
   background-repeat: no-repeat;
   height: 57px;
 }
+
+.encima {
+  position: absolute;
+  z-index: 9999;
+  top: 50vh;
+  left: 25vw;
+  color: white;
+  padding: 10px;
+}

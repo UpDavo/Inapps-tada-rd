@@ -11,11 +11,12 @@ export class CatchingGameComponent implements OnInit {
 
   ngOnInit(): void {
     var discounts = [
-      { descripcion: '5% de descuento', code: 'asdad', score: [21, 40] },
-      { descripcion: '5% de descuento', code: 'asdad', score: [13, 20] },
-      { descripcion: '5% de descuento', code: 'asdad', score: [9, 12] },
-      { descripcion: '5% de descuento', code: 'asdad', score: [6, 8] },
-      { descripcion: '10% de descuento', code: 'kjas', score: [1, 5] },
+      { descripcion: 'Ganaste RD$50 de descuento', code: 'POWER50', score: [1, 10] },
+      { descripcion: 'Ganaste RD$75 de descuento', code: '75POWER', score: [11, 20] },
+      { descripcion: 'Ganaste 1 Cerveza Gratis', code: 'FRIAGRATIS', score: [21, 40] },
+      { descripcion: 'Ganaste 15% de descuento', code: 'DOMI15', score: [41, 50] },
+      { descripcion: 'Ganaste 150 de descuento', code: 'DOMI150', score: [51, 60] },
+      { descripcion: 'Ganaste 2 Cerveza Gratis', code: 'FRIASDOMI', score: [61, 70] },
     ];
     var game = document.querySelector('.game') as HTMLElement;
     var basket = document.querySelector('.basket') as HTMLElement;
@@ -30,9 +31,16 @@ export class CatchingGameComponent implements OnInit {
     var screen_width = window.innerWidth;
     var screen_height = window.innerHeight;
     var score_div = document.getElementById('score') as HTMLElement;
+    var update_score = 1;
+    var velocity = 0;
+    var previous = 0;
     var score = 0;
 
-    var beers_images = ['/assets/img/platano.png', '/assets/img/frito.png'];
+    var beers_images = [
+      ['/assets/img/platano.png', 1],
+      ['/assets/img/frito.png', 1],
+      ['/assets/img/presidente.png', 2],
+    ];
     var garbage_images = [
       ['/assets/img/bomb.png', '-6px', '-57px', '5rem'],
       ['/assets/img/bomb.png', '-6px', '-57px', '5rem'],
@@ -43,6 +51,50 @@ export class CatchingGameComponent implements OnInit {
     loader.style.display = 'none';
 
     var lives = 2;
+
+    function mostrarRapido() {
+      let rapido = document.getElementById('rapido') as HTMLElement;
+      rapido.style.display = 'block';
+      fadeIn(rapido, 180, function () {
+        setTimeout(function () {
+          fadeOut(rapido, 180, function () {
+            rapido.style.display = 'none';
+          });
+        }, 180);
+      });
+    }
+
+    function fadeIn(elemento: any, duracion: any, callback: any) {
+      elemento.style.opacity = 0;
+      var tiempoInicio = new Date().getTime();
+      var intervalo = setInterval(function () {
+        var tiempoTranscurrido = new Date().getTime() - tiempoInicio;
+        if (tiempoTranscurrido >= duracion) {
+          clearInterval(intervalo);
+          elemento.style.opacity = 1;
+          if (callback) callback();
+        } else {
+          var porcentaje = tiempoTranscurrido / duracion;
+          elemento.style.opacity = porcentaje;
+        }
+      }, 10);
+    }
+
+    function fadeOut(elemento: any, duracion: any, callback: any) {
+      elemento.style.opacity = 1;
+      var tiempoInicio = new Date().getTime();
+      var intervalo = setInterval(function () {
+        var tiempoTranscurrido = new Date().getTime() - tiempoInicio;
+        if (tiempoTranscurrido >= duracion) {
+          clearInterval(intervalo);
+          elemento.style.opacity = 0;
+          if (callback) callback();
+        } else {
+          var porcentaje = 1 - tiempoTranscurrido / duracion;
+          elemento.style.opacity = porcentaje;
+        }
+      }, 10);
+    }
 
     function convertPXToVW(px: any) {
       return px * (100 / screen_width);
@@ -98,7 +150,8 @@ export class CatchingGameComponent implements OnInit {
     function generateBeers() {
       var random_number = Math.floor(Math.random() * garbage_images.length);
       var random_garbage = Math.floor(Math.random() * garbage_images.length);
-
+      var rotation = Math.floor(Math.random() * 181);
+      var direction = Math.random() < 0.5 ? -1 : 1;
       var garbage = false;
 
       var beerBottom = convertVHToPX(75);
@@ -116,30 +169,50 @@ export class CatchingGameComponent implements OnInit {
         img.style.left = garbage_images[random_garbage][1];
         img.style.top = garbage_images[random_garbage][2];
         img.style.maxWidth = garbage_images[random_garbage][3];
+        img.style.transform = 'rotate(' + rotation * direction + 'deg)';
         // img.style.width = garbage_images[random_garbage][4];
         garbage = true;
       } else {
-        img.src = beers_images[Math.floor(Math.random() * beers_images.length)];
+        let random_beer = Math.floor(Math.random() * beers_images.length);
+        img.src = beers_images[random_beer][0] as string;
+        update_score = beers_images[random_beer][1] as number;
         img.style.top = '-52px';
         img.style.left = '-44px';
         img.style.maxWidth = '7em';
+        img.style.transform = 'rotate(' + rotation * direction + 'deg)';
       }
 
       function increaseDifficulty(): number {
-        let velocity = 20;
-        if (score >= 0 && score <= 5) {
+        if (score >= 0 && score <= 10) {
           velocity = 20;
+          previous = velocity;
         } else {
-          if (score > 5 && score <= 10) {
+          if (score > 10 && score <= 20) {
             velocity = 16;
+            if (velocity < previous) {
+              mostrarRapido();
+              previous = velocity;
+            }
           } else {
-            if (score > 10 && score <= 15) {
+            if (score > 20 && score <= 40) {
               velocity = 12;
+              if (velocity < previous) {
+                mostrarRapido();
+                previous = velocity;
+              }
             } else {
-              if (score > 15 && score <= 20) {
+              if (score > 40 && score <= 60) {
                 velocity = 9;
+                if (velocity < previous) {
+                  mostrarRapido();
+                  previous = velocity;
+                }
               } else {
                 velocity = 7;
+                if (velocity < previous) {
+                  mostrarRapido();
+                  previous = velocity;
+                }
               }
             }
           }
@@ -158,16 +231,16 @@ export class CatchingGameComponent implements OnInit {
             document.removeEventListener('touchmove', touchMoveHandler);
             return {
               title: `<h3 style='font-size: 1.3rem !important; font-family: Monserrat !important; color: #6f4b98; text-transform: uppercase; font-weight: lighter;'>${discounts[discoiuntId].descripcion}</h3>`,
-              html: `<h3 style='font-size:2rem;font-family: Monserrat !important; font-weight:bold; color: #6f4b98; text-transform: uppercase; margin-bottom: 18px;'>${discounts[discoiuntId].code}</h3><h4 style='font-size:1rem;font-family: Monserrat !important; color: #6f4b98; text-transform: uppercase; margin-bottom: 18px;'>Tu puntaje es de ${score}<h4>`,
+              html: `<h3 style='font-size:2rem;font-family: Monserrat !important; font-weight:bold; color: #6f4b98; text-transform: uppercase; margin-bottom: 18px;'>${discounts[discoiuntId].code}</h3><h4 style='font-size:1rem;font-family: Monserrat !important; color: #6f4b98; text-transform: uppercase; margin-bottom: 18px;'>Tu puntaje es de: ${score}<h4>`,
               imageUrl: '/assets/img/felicidades.png',
               width: '23em',
               imageAlt: 'Custom image',
               showCloseButton: false,
               allowOutsideClick: false,
-              showConfirmButton: true,
-              focusConfirm: false,
-              confirmButtonText: 'COMPRAR YA',
-              confirmButtonColor: '#6f4b98',
+              showConfirmButton: false,
+              // focusConfirm: false,
+              // confirmButtonText: 'COMPRAR YA',
+              // confirmButtonColor: '#6f4b98',
             };
           default:
             return {
@@ -205,26 +278,8 @@ export class CatchingGameComponent implements OnInit {
         ) {
           beers.removeChild(beer);
           clearInterval(fallInterval);
-          score++;
+          score += update_score;
           score_div.textContent = 'Puntuación: ' + score + ' - Vidas: ' + lives;
-          // if (score == 5) {
-          //   clearInterval(fallInterval);
-          //   clearTimeout(beerTimeout);
-          //   Swal.fire({
-          //     title:
-          //       "<h3 style='font-size: 2.2rem !important; font-family: Bright !important; color: #270a45;'>¡Felicidades, ganaste! 🎩</h3>",
-          //     imageUrl: '/assets/img/logo_tada.png',
-          //     width: '21em',
-          //     imageWidth: '12rem',
-          //     imageHeight: '5rem',
-          //     imageAlt: 'Custom image',
-          //     html: "<h3 style='font-size:0.9rem;font-family: Monserrat !important;'>Disfruta de una botella pilsener o nuestra siembra litro gratis usando el cupón:</h2><br><h3 style='font-family: Bright !important;font-size: 2.6rem;color: #270a45;'>YORETORNO</h3>",
-          //     showCloseButton: false,
-          //     showConfirmButton: true,
-          //     confirmButtonText: '¡A comprar!',
-          //     confirmButtonColor: '#270a45',
-          //   });
-          // }
         }
 
         if (beerBottom < basketBottom && garbage == false) {
