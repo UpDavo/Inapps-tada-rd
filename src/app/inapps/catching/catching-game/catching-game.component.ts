@@ -273,11 +273,7 @@ export class CatchingGameComponent implements OnInit {
               html: `<h3 style='font-size:0.9rem;font-family: Monserrat !important;'>Estuviste muy cerca de ganar continúa jugando para saber tu puntaje final <br><br> <b>Tienes ${
                 lives != 1 ? lives + ' Vidas' : lives + ' Vida'
               }</b></h3>`,
-              imageUrl: '/assets/img/logo_tada.png',
               width: '23em',
-              imageWidth: '12rem',
-              imageHeight: '5rem',
-              imageAlt: 'Custom image',
               showCloseButton: false,
               allowOutsideClick: false,
               showConfirmButton: true,
