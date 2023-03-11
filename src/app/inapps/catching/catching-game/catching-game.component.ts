@@ -11,12 +11,36 @@ export class CatchingGameComponent implements OnInit {
 
   ngOnInit(): void {
     var discounts = [
-      { descripcion: 'Ganaste RD$50 de descuento', code: 'POWER50', score: [1, 10] },
-      { descripcion: 'Ganaste RD$75 de descuento', code: '75POWER', score: [11, 20] },
-      { descripcion: 'Ganaste 1 Cerveza Gratis', code: 'FRIAGRATIS', score: [21, 40] },
-      { descripcion: 'Ganaste 15% de descuento', code: 'DOMI15', score: [41, 50] },
-      { descripcion: 'Ganaste 150 de descuento', code: 'DOMI150', score: [51, 60] },
-      { descripcion: 'Ganaste 2 Cerveza Gratis', code: 'FRIASDOMI', score: [61, 70] },
+      {
+        descripcion: 'Ganaste RD$50 de descuento',
+        code: 'POWER50',
+        score: [1, 10],
+      },
+      {
+        descripcion: 'Ganaste RD$75 de descuento',
+        code: '75POWER',
+        score: [11, 20],
+      },
+      {
+        descripcion: 'Ganaste 1 Cerveza Gratis',
+        code: 'FRIAGRATIS',
+        score: [21, 40],
+      },
+      {
+        descripcion: 'Ganaste 15% de descuento',
+        code: 'DOMI15',
+        score: [41, 50],
+      },
+      {
+        descripcion: 'Ganaste 150 de descuento',
+        code: 'DOMI150',
+        score: [51, 60],
+      },
+      {
+        descripcion: 'Ganaste 2 Cerveza Gratis',
+        code: 'FRIASDOMI',
+        score: [61, 70],
+      },
     ];
     var game = document.querySelector('.game') as HTMLElement;
     var basket = document.querySelector('.basket') as HTMLElement;
@@ -245,7 +269,7 @@ export class CatchingGameComponent implements OnInit {
           default:
             return {
               title:
-                "<h3 style='font-size: 2.2rem !important; font-family: Bright !important; color: #270a45;'>¡Oh no!</h3>",
+                "<h3 style='font-size: 2.2rem !important; font-family: Bright !important; color: #6f4b98;'>¡Oh no!</h3>",
               html: `<h3 style='font-size:0.9rem;font-family: Monserrat !important;'>Estuviste muy cerca de ganar continúa jugando para saber tu puntaje final <br><br> <b>Tienes ${
                 lives != 1 ? lives + ' Vidas' : lives + ' Vida'
               }</b></h3>`,
@@ -258,10 +282,9 @@ export class CatchingGameComponent implements OnInit {
               allowOutsideClick: false,
               showConfirmButton: true,
               focusConfirm: false,
-              confirmButtonText:
-                '<i class="fa fa-thumbs-up"></i> ¿Jugar de Nuevo?',
+              confirmButtonText: 'Continuar',
               confirmButtonAriaLabel: 'Thumbs up, great!',
-              confirmButtonColor: '#270a45',
+              confirmButtonColor: '#6f4b98',
             };
         }
       }

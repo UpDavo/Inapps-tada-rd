@@ -782,7 +782,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   bottom: 0px;
   left: 0px;
   font-family: Bright;
-  background-image: url("/assets/img/platano_bg.png");
+  background-image: url("/assets/img/catching_bg_2.png");
+  background-color: #fff;
   background-repeat: no-repeat;
   background-size: cover;
   overflow: hidden;
