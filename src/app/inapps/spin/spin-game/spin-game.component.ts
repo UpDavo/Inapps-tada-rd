@@ -180,35 +180,21 @@ export class SpinGameComponent implements AfterViewInit {
               Swal.update({
                 html: `
                 <div class="grid">
-                  <div>
-                    <img src=${this.prizes[ganador[0]].image} alt="cupon" />
-                  </div>
-                  <div class="mt-2 mb-4">
-                    <h3 class="text-white text-md">¡Texto copiado!</h3>
-                  </div>
-                </div>
-              `,
-              });
-              setTimeout(() => {
-                Swal.update({
-                  html: `
-                  <div class="grid">
                     <div>
                       <img src=${this.prizes[ganador[0]].image} alt="cupon" />
                     </div>
                     <div class="mt-2">
-                      <h3 class="text-white text-md">Tap para copiar el código</h3>
+                      <h3 class="text-white text-md">¡Código copiado!</h3>
                       <button
-                        class="btn btn-lg font-bold text-xl text-secondary btn-primary btn-block uppercase mt-4"
+                        class="btn btn-lg font-bold text-xl text-secondary btn-disabled btn-primary btn-block uppercase mt-4"
                         id="copy"
                       >
                         ${this.prizes[ganador[0]].code}
                       </button>
                     </div>
                   </div>
-                `,
-                });
-              }, 2000); // Volver al mensaje original después de 2 segundos
+              `,
+              });
             });
         });
       } else {
