@@ -24,6 +24,7 @@ export class SpinGameComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     this.loading = false;
+    this.doing = false;
   }
 
   doSlot(): any {
@@ -157,11 +158,8 @@ export class SpinGameComponent implements AfterViewInit {
                 <div class="mt-2">
                   <h3 class="text-white text-md">Tap para copiar el código</h3>
                   <button
-                    class="btn btn-sm text-secondary btn-primary btn-block uppercase mt-4"
+                    class="btn btn-lg font-bold text-xl text-secondary btn-primary btn-block uppercase mt-4"
                     id="copy"
-                    onClick="navigator.clipboard.writeText('${
-                      this.prizes[ganador[0]].code
-                    }')"
                   >
                     ${this.prizes[ganador[0]].code}
                   </button>
@@ -171,6 +169,47 @@ export class SpinGameComponent implements AfterViewInit {
           showCloseButton: false,
           showConfirmButton: false,
           allowOutsideClick: false,
+        });
+
+        // Agregar un evento de clic personalizado al elemento con el código del premio
+        let element = document.getElementById('copy') as HTMLElement;
+        element.addEventListener('click', () => {
+          navigator.clipboard
+            .writeText(this.prizes[ganador[0]].code.toUpperCase())
+            .then(() => {
+              Swal.update({
+                html: `
+                <div class="grid">
+                  <div>
+                    <img src=${this.prizes[ganador[0]].image} alt="cupon" />
+                  </div>
+                  <div class="mt-2 mb-4">
+                    <h3 class="text-white text-md">¡Texto copiado!</h3>
+                  </div>
+                </div>
+              `,
+              });
+              setTimeout(() => {
+                Swal.update({
+                  html: `
+                  <div class="grid">
+                    <div>
+                      <img src=${this.prizes[ganador[0]].image} alt="cupon" />
+                    </div>
+                    <div class="mt-2">
+                      <h3 class="text-white text-md">Tap para copiar el código</h3>
+                      <button
+                        class="btn btn-lg font-bold text-xl text-secondary btn-primary btn-block uppercase mt-4"
+                        id="copy"
+                      >
+                        ${this.prizes[ganador[0]].code}
+                      </button>
+                    </div>
+                  </div>
+                `,
+                });
+              }, 2000); // Volver al mensaje original después de 2 segundos
+            });
         });
       } else {
         if (this.lives != 0) {

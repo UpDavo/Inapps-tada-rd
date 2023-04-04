@@ -12,10 +12,10 @@
         </div>
 
         <div *ngIf="!loading" class="titulos" align="center">
-          <img class="mt-12" src="/assets/img/prueba_y_gana.png" alt="logo" />
+          <img class="mt-14" src="/assets/img/prueba_y_gana.png" alt="logo" />
           <div class="flex justify-center gap-3 md:gap-8">
             <div id="app">
-              <section class="machine my-[11vh]" id="Slots">
+              <section class="machine my-[9vh]" id="Slots">
                 <div class="slots-container">
                   <div id="slot1" class="a4"></div>
                   <div id="slot2" class="a4"></div>
@@ -25,7 +25,13 @@
 
               <div class="-mt-6">
                 <button
-                  class="imgButton animate-bounce w-[60%]"
+                  *ngIf="!doing"
+                  class="imgButton animate-pulse w-[60%]"
+                  (click)="doSlot()"
+                ></button>
+                <button
+                  *ngIf="doing"
+                  class="imgButton animate-pulse w-[60%]"
                   (click)="doSlot()"
                 ></button>
               </div>
@@ -39,7 +45,7 @@
                   <div class="font-bold text-2xl mt-3">
                     CHANCES<br />RESTANTES
                   </div>
-                  <div class="font-bold text-7xl bg-indigo-500 p-2">
+                  <div class="font-bold text-7xl bg-indigo-500 p-2 px-3">
                     {{ lives }}
                   </div>
                 </div>
@@ -51,8 +57,9 @@
               >
                 <br />
                 <div class="flex justify-center items-center gap-3">
-                  <div class="font-bold text-3xl mt-3 pb-2 leading-relaxed">
-                    ÚLTIMO CHANCE
+                  <div class="font-bold text-2xl mt-3 pb-2 leading-relaxed">
+                    ÚLTIMO <br />
+                    CHANCE
                   </div>
                 </div>
               </div>
