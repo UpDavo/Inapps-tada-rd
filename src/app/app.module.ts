@@ -7,9 +7,10 @@ import { AppComponent } from './app.component';
 import { SpinComponent } from './inapps/spin/spin.component';
 import { CatchingComponent } from './inapps/catching/catching.component';
 import { CatchingGameComponent } from './inapps/catching/catching-game/catching-game.component';
+import { SpinGameComponent } from './inapps/spin/spin-game/spin-game.component';
 
 @NgModule({
-  declarations: [AppComponent, RouletteComponent, SpinComponent, CatchingComponent, CatchingGameComponent],
+  declarations: [AppComponent, RouletteComponent, SpinComponent, CatchingComponent, CatchingGameComponent, SpinGameComponent],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
