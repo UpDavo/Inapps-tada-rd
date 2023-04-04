@@ -1214,5 +1214,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-image: url("/assets/img/boton.png");
   background-size: cover;
   background-repeat: no-repeat;
-  height: 57px;
+  height: 2em;
+  width: 30vw;
+  position: relative;
+  top: 43vh;
+}
+
+.instructions_bottom {
+  position: relative;
+  top: 45vh;
 }
