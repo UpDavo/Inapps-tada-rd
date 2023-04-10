@@ -17,6 +17,10 @@ export class SpinGameComponent implements AfterViewInit {
     { image: '/assets/img/cupon6-min.png', code: 'PROMO100' },
     { image: '/assets/img/cupon2-min.png', code: '15FREE' },
     { image: '/assets/img/cupon1-min.png', code: '2GRATIS' },
+    { image: '/assets/img/cupon7-min.png', code: 'REGALO777' },
+    { image: '/assets/img/cupon8-min.png', code: '200FREE' },
+    { image: '/assets/img/cupon9-min.png', code: '150HOY' },
+    { image: '/assets/img/cupon10-min.png', code: 'TADAPROMO' },
   ];
   loading = true;
 
@@ -123,6 +127,42 @@ export class SpinGameComponent implements AfterViewInit {
         (slot3 === 'a4' ||
           (slot3 === 'a2' && (slot1 === 'a4' || slot2 === 'a4')));
 
+      let ganador_2_presidente_lata_modelo =
+        (slot1 === 'a1' || slot1 === 'a2') &&
+        (slot2 === 'a1' || slot2 === 'a2') &&
+        (slot3 === 'a2' ||
+          (slot3 === 'a1' && (slot1 === 'a2' || slot2 === 'a2')));
+
+      let ganador_2_presidente_lata_botella =
+        (slot1 === 'a1' || slot1 === 'a3') &&
+        (slot2 === 'a1' || slot2 === 'a3') &&
+        (slot3 === 'a3' ||
+          (slot3 === 'a1' && (slot1 === 'a3' || slot2 === 'a3')));
+
+      let ganador_2_presidente_botella_lata =
+        (slot1 === 'a3' || slot1 === 'a1') &&
+        (slot2 === 'a3' || slot2 === 'a1') &&
+        (slot3 === 'a1' ||
+          (slot3 === 'a3' && (slot1 === 'a1' || slot2 === 'a1')));
+
+      // let ganador_2_presidente_botella_modelo =
+      //   (slot1 === 'a3' || slot1 === 'a2') &&
+      //   (slot2 === 'a3' || slot2 === 'a2') &&
+      //   (slot3 === 'a2' ||
+      //     (slot3 === 'a3' && (slot1 === 'a2' || slot2 === 'a2')));
+
+      // let ganador_2modelos_lata_presidente =
+      //   (slot1 === 'a2' || slot1 === 'a1') &&
+      //   (slot2 === 'a2' || slot2 === 'a1') &&
+      //   (slot3 === 'a1' ||
+      //     (slot3 === 'a2' && (slot1 === 'a1' || slot2 === 'a1')));
+
+      let ganador_2modelos_botella_presidente =
+        (slot1 === 'a2' || slot1 === 'a3') &&
+        (slot2 === 'a2' || slot2 === 'a3') &&
+        (slot3 === 'a3' ||
+          (slot3 === 'a2' && (slot1 === 'a3' || slot2 === 'a3')));
+
       let ganador: (any | boolean)[] = [null, false];
 
       if (ganador_todo_presidente_lata) {
@@ -139,6 +179,18 @@ export class SpinGameComponent implements AfterViewInit {
         ganador = [5, true];
       } else if (ganador_2modelos_sombrero) {
         ganador = [6, true];
+      } else if (ganador_2_presidente_lata_modelo) {
+        ganador = [7, true];
+      } else if (ganador_2_presidente_lata_botella) {
+        ganador = [8, true];
+      } else if (ganador_2_presidente_botella_lata) {
+        ganador = [9, true];
+        // } else if (ganador_2_presidente_botella_modelo) {
+        //   ganador = [10, true];
+        // } else if (ganador_2modelos_lata_presidente) {
+        //   ganador = [11, true];
+      } else if (ganador_2modelos_botella_presidente) {
+        ganador = [10, true];
       }
 
       console.log(ganador);
