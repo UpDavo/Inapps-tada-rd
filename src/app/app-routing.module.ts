@@ -5,9 +5,11 @@ import { CatchingComponent } from './inapps/catching/catching.component';
 import { RouletteComponent } from './inapps/roulette/roulette.component';
 import { SpinGameComponent } from './inapps/spin/spin-game/spin-game.component';
 import { SpinComponent } from './inapps/spin/spin.component';
+import { VideoComponent } from './inapps/video/video.component';
 
 const routes: Routes = [
   { path: 'roulette', component: RouletteComponent },
+  { path: 'video', component: VideoComponent },
   { path: 'catching', component: CatchingComponent },
   { path: 'catching/game', component: CatchingGameComponent },
   { path: 'spin', component: SpinComponent },
