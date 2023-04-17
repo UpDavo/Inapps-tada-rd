@@ -6,6 +6,7 @@ import { RouletteComponent } from './inapps/roulette/roulette.component';
 import { SpinGameComponent } from './inapps/spin/spin-game/spin-game.component';
 import { SpinComponent } from './inapps/spin/spin.component';
 import { VideoComponent } from './inapps/video/video.component';
+import { PinataComponent } from './inapps/pinata/pinata.component';
 
 const routes: Routes = [
   { path: 'roulette', component: RouletteComponent },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'catching/game', component: CatchingGameComponent },
   { path: 'spin', component: SpinComponent },
   { path: 'spin/game', component: SpinGameComponent },
+  { path: 'pinata/game', component: PinataComponent },
 
   // no layout views
   { path: '**', redirectTo: '/', pathMatch: 'full' },
