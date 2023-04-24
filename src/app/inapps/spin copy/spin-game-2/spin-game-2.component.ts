@@ -3,8 +3,8 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-spin-game-2',
-  templateUrl: './spin-game.component.html',
-  styleUrls: ['./spin-game.component.css'],
+  templateUrl: './spin-game-2.component.html',
+  styleUrls: ['./spin-game-2.component.css'],
 })
 export class SpinGameComponent2 implements AfterViewInit {
   doing = false;

@@ -10,15 +10,19 @@ import { CatchingGameComponent } from './inapps/catching/catching-game/catching-
 import { SpinGameComponent } from './inapps/spin/spin-game/spin-game.component';
 import { VideoComponent } from './inapps/video/video.component';
 import { PinataComponent } from './inapps/pinata/pinata.component';
+import { SpinComponent2 } from './inapps/spin copy/spin-2.component';
+import { SpinGameComponent2 } from './inapps/spin copy/spin-game-2/spin-game-2.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RouletteComponent,
     SpinComponent,
+    SpinComponent2,
     CatchingComponent,
     CatchingGameComponent,
     SpinGameComponent,
+    SpinGameComponent2,
     VideoComponent,
     PinataComponent,
   ],

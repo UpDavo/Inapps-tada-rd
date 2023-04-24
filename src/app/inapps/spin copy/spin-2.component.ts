@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-spin-2',
-  templateUrl: './spin.component.html',
-  styleUrls: ['./spin.component.css'],
+  templateUrl: './spin-2.component.html',
+  styleUrls: ['./spin-2.component.css'],
 })
 export class SpinComponent2 implements OnInit {
   showInstructions = true;
