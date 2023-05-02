@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'spin/game', component: SpinGameComponent },
   { path: 'spin2', component: SpinComponent2 },
   { path: 'spin2/game2', component: SpinGameComponent2 },
-  { path: 'pinata/game', component: PinataComponent },
+  { path: 'pinata', component: PinataComponent },
 
   // no layout views
   { path: '**', redirectTo: '/', pathMatch: 'full' },

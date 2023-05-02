@@ -1,100 +1,111 @@
-import { Component, OnInit } from '@angular/core';
-import { TweenMax, TimelineMax, Elastic, Sine, Circ } from 'gsap';
-import Swal from 'sweetalert2';
+import { Component, AfterViewInit } from '@angular/core';
 import confetti from 'canvas-confetti';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pinata',
   templateUrl: './pinata.component.html',
   styleUrls: ['./pinata.component.css'],
 })
-export class PinataComponent implements OnInit {
-  pinata: any;
-  pinataLeft: any;
-  pinataTop: any;
-  tween: any;
-  tl: any;
-  taps: number = 0;
+export class PinataComponent implements AfterViewInit {
+  //scale-100
+  pinata: HTMLButtonElement | any;
+  div_pinata: HTMLButtonElement | any;
+  button: HTMLButtonElement | any;
+  colors = ['#ffff82', '#81450e', '#ffb239', '#93682e'];
+  mostrarInstrucciones = false;
+  contador = 0;
+  imagenBotella = 'assets/img/pinata/botella_1.png';
+  imgTitulo = 'assets/img/pinata/titulo.png';
+  imgInstrucciones = 'assets/img/pinata/instrucciones.png';
 
-  ngOnInit(): void {
-    // Variables para la animación de la piñata
-    var pinataBody = document.querySelector('#pinata-body') as HTMLElement;
-    var tl = new TimelineMax({ repeat: -1 });
+  ngAfterViewInit() {
+    this.pinata = document.getElementById('pinata') as HTMLButtonElement;
+    this.div_pinata = document.getElementById('scale') as HTMLButtonElement;
+    this.button = document.getElementById('button') as HTMLElement;
+  }
 
-    var taps = 0;
+  cambiarImagen() {
+    this.contador++;
 
-    // Animación de movimiento de la piñata
-    var tween = TweenMax.from('#pinata', 3, {
-      y: -50,
-      ease: Elastic.easeOut,
-    });
-
-    // Animación de golpeo de la piñata
-    tl.to('#pinata', 0.5, {
-      transformOrigin: 'center top',
-      rotation: 3,
-      repeat: 1,
-      yoyo: true,
-      ease: Sine.easeOut,
-    }).to('#pinata', 0.5, {
-      transformOrigin: 'center top',
-      rotation: -3,
-      repeat: 1,
-      yoyo: true,
-      ease: Sine.easeOut,
-    });
-
-    // Función para reiniciar la animación de golpeo
-    function restartswing(this: any) {
-      this.tl.restart();
+    if (this.contador <= 3) {
+      console.log(this.contador);
+      confetti({
+        particleCount: 100, // Número de partículas
+        spread: 70, // Área en la que se distribuyen las partículas
+        origin: { y: 0.6 }, // Posición de inicio
+        colors: this.colors, // Colores del confetti
+      });
     }
 
-    // Evento de clic en el contenedor de la piñata
-    const piñata = document.querySelector('.pinata-container') as HTMLElement;
+    if (this.contador == 1) {
+      this.mostrarInstrucciones = true;
+      this.imagenBotella = 'assets/img/pinata/botella_1.png';
+    }
 
-    piñata.addEventListener('click', function (e) {
-      // Aumentar el contador de golpes
-      taps++;
-      console.log(taps);
-      if (taps >= 3) {
-        // Detener la animación de movimiento
-        tween.pause();
-        // Configuramos los colores que queremos que tenga el confetti
-        const colors = ['#FF0000', '#00FF00', '#0000FF'];
-        confetti({
-          particleCount: 100, // Número de partículas
-          spread: 70, // Área en la que se distribuyen las partículas
-          origin: { y: 0.6 }, // Posición de inicio
-          colors: colors, // Colores del confetti
-        });
-        // Lanzamos el confetti
-        setTimeout(() => {
-          Swal.fire({
-            title: 'Felicidades',
-            text: 'Has ganado un premio',
-            icon: 'success',
-            allowOutsideClick: false,
-            showConfirmButton: false,
-          });
-        }, 400);
+    if (this.contador <= 2) {
+      switch (this.contador) {
+        case 1:
+          this.div_pinata.classList.add('scale-150');
+          this.pinata.classList.add('expandida');
+          break;
+        case 2:
+          this.pinata.classList.remove('expandida');
+          this.imagenBotella = 'assets/img/pinata/botella_2.png';
+          this.pinata.classList.add('shake');
+          setTimeout(() => {
+            this.pinata.classList.remove('shake');
+          }, 620);
+
+          break;
       }
+    }
+    if (this.contador == 3) {
+      this.pinata.classList.remove('expandida');
+      this.imgTitulo = 'assets/img/pinata/ganaste_titulo.png';
+      this.imgInstrucciones = 'assets/img/pinata/ganaste_sub.png';
+      this.imagenBotella = 'assets/img/pinata/botella_3.png';
+      this.pinata.classList.add('shake-aggressive');
+      setTimeout(() => {
+        this.pinata.classList.remove('shake-aggressive');
+        this.pinata.classList.add('reducida');
+        this.div_pinata.classList.remove('scale-150');
+        this.div_pinata.classList.add('scale-100');
+        this.button.style.display = 'block';
+        this.mostrarInstrucciones = false;
+      }, 620);
+    }
+  }
 
-      // Reiniciar la animación de golpeo
-      restartswing.call({ tl: tl });
+  copyToClipboard() {
+    const textToCopy = '5demayo'.toUpperCase();
 
-      // Obtener la posición de la piñata y calcular la dirección del golpe
-      var pinataTop = pinataBody.offsetTop - e.pageY + 83;
-      var pinataLeft = pinataBody.offsetLeft - e.pageX + 83;
-      var tlswing = TweenMax.to('#pinata', 0.5, {
-        rotation: (pinataTop - pinataLeft) / 3,
-        repeat: 1,
-        yoyo: true,
-        ease: Circ.easeOut,
-        onComplete: restartswing.bind({ tl: tl }),
-      });
+    const tempElement = document.createElement('textarea');
+    tempElement.value = textToCopy;
+    document.body.appendChild(tempElement);
 
-      // Reproducir la animación de golpeo
-      tlswing.play();
+    tempElement.select();
+    document.execCommand('copy');
+
+    document.body.removeChild(tempElement);
+
+    Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+      padding: '1rem',
+    }).fire({
+      icon: 'success',
+      title: '¡Texto copiado al portapapeles!',
+      text: textToCopy,
+      showClass: {
+        popup: 'animate__animated animate__fadeInRight',
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutRight',
+      },
     });
   }
 }

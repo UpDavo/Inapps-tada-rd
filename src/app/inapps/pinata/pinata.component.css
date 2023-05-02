@@ -54,12 +54,92 @@
   width: 100%;
 }
 
-#pinata {
-  overflow: visible;
-  position: absolute;
-  left: 37.5vw;
-  top: 0px;
-  width: 46vw;
-  margin-left: -75px;
-  transform-origin: top center;
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+.pinata-img {
+  position: relative;
+  overflow: hidden;
+  width: 200px;
+  height: 200px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.pinata-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.expandida {
+  transform: scale(1.2);
+}
+
+.reducida {
+  transform: scale(1);
+}
+
+.shake {
+  animation: shake 0.5s linear;
+}
+
+.shake-aggressive {
+  animation: shake-aggressive 0.5s linear;
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-10px, 0);
+  }
+  40% {
+    transform: translate(10px, 0);
+  }
+  60% {
+    transform: translate(-10px, 0);
+  }
+  80% {
+    transform: translate(10px, 0);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+@keyframes shake-aggressive {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-20px, 0);
+  }
+  40% {
+    transform: translate(20px, 0);
+  }
+  60% {
+    transform: translate(-20px, 0);
+  }
+  80% {
+    transform: translate(20px, 0);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.imgButton {
+  margin-top: 4vh;
+  background-image: url("/assets/img/pinata/boton.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 2em;
+  width: 30vw;
+  position: relative;
+  top: 43vh;
 }
