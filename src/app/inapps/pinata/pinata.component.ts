@@ -18,6 +18,7 @@ export class PinataComponent implements AfterViewInit {
   imagenBotella = 'assets/img/pinata/botella_1.png';
   imgTitulo = 'assets/img/pinata/titulo.png';
   imgInstrucciones = 'assets/img/pinata/instrucciones.png';
+  mas = false;
 
   ngAfterViewInit() {
     this.pinata = document.getElementById('pinata') as HTMLButtonElement;
@@ -40,6 +41,10 @@ export class PinataComponent implements AfterViewInit {
 
     if (this.contador == 1) {
       this.mostrarInstrucciones = true;
+      this.mas = true;
+      this.imgTitulo = 'assets/img/pinata/ganaste_titulo.png';
+      this.imgInstrucciones = 'assets/img/pinata/ganaste_sub.png';
+      this.div_pinata.classList.add('-mt-28');
       this.imagenBotella = 'assets/img/pinata/botella_1.png';
     }
 
@@ -61,15 +66,15 @@ export class PinataComponent implements AfterViewInit {
       }
     }
     if (this.contador == 3) {
+      this.mas = false;
       this.pinata.classList.remove('expandida');
-      this.imgTitulo = 'assets/img/pinata/ganaste_titulo.png';
-      this.imgInstrucciones = 'assets/img/pinata/ganaste_sub.png';
       this.imagenBotella = 'assets/img/pinata/botella_3.png';
       this.pinata.classList.add('shake-aggressive');
       setTimeout(() => {
         this.pinata.classList.remove('shake-aggressive');
         this.pinata.classList.add('reducida');
         this.div_pinata.classList.remove('scale-150');
+        this.div_pinata.classList.remove('-mt-28');
         this.div_pinata.classList.add('scale-100');
         this.button.style.display = 'block';
         this.mostrarInstrucciones = false;
@@ -94,12 +99,10 @@ export class PinataComponent implements AfterViewInit {
       position: 'top-end',
       showConfirmButton: false,
       timer: 2000,
-      timerProgressBar: true,
-      padding: '1rem',
+      timerProgressBar: false,
+      padding: '0.4rem',
     }).fire({
-      icon: 'success',
-      title: '¡Texto copiado al portapapeles!',
-      text: textToCopy,
+      title: '¡Código copiado al portapapeles!',
       showClass: {
         popup: 'animate__animated animate__fadeInRight',
       },

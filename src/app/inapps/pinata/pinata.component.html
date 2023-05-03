@@ -1,5 +1,5 @@
 <div
-  class="w-full h-screen flex flex-col justify-center items-center relative"
+  class="w-full h-screen flex flex-col justify-center items-center relative overflow-hidden"
   style="
     background-image: url('assets/img/pinata/back.png');
     background-repeat: no-repeat;
@@ -22,12 +22,20 @@
       >
         <div
           id="scale"
-          class="flex items-center justify-center transition-all duration-500 transform"
+          class="flex items-center justify-center transition-all duration-500 transform z-20"
         >
           <img class="w-48" src="{{ imagenBotella }}" alt="Piñata" />
         </div>
       </button>
     </div>
+  </div>
+  <div
+    *ngIf="mas"
+    class="relative top-20 w-full flex-col justify-center items-center z-10"
+  >
+    <h1 class="font-bold uppercase text-3xl text-white animate-bounce">
+      {{ contador == 1 ? "¡Otro tap!" : "¡Último tap!" }}
+    </h1>
   </div>
   <div class="w-full mt-auto mb-20" [class.fade-out]="mostrarInstrucciones">
     <img
@@ -51,4 +59,11 @@
       </button>
     </div>
   </div>
+  <img hidden src="assets/img/pinata/botella_1.png" alt="Piñata" />
+  <img hidden src="assets/img/pinata/ganaste_titulo.png" alt="Piñata" />
+  <img hidden src="assets/img/pinata/ganaste_sub.png" alt="Piñata" />
+  <img hidden src="assets/img/pinata/titulo.png" alt="Piñata" />
+  <img hidden src="assets/img/pinata/instrucciones.png" alt="Piñata" />
+  <img hidden src="assets/img/pinata/botella_2.png" alt="Piñata" />
+  <img hidden src="assets/img/pinata/botella_3.png" alt="Piñata" />
 </div>
