@@ -9,10 +9,12 @@ import { VideoComponent } from './inapps/video/video.component';
 import { PinataComponent } from './inapps/pinata/pinata.component';
 import { SpinComponent2 } from './inapps/spin copy/spin-2.component';
 import { SpinGameComponent2 } from './inapps/spin copy/spin-game-2/spin-game-2.component';
+import { VideoComponent2 } from './inapps/video2/video.component';
 
 const routes: Routes = [
   { path: 'roulette', component: RouletteComponent },
   { path: 'video', component: VideoComponent },
+  { path: 'video2', component: VideoComponent2 },
   { path: 'catching', component: CatchingComponent },
   { path: 'catching/game', component: CatchingGameComponent },
   { path: 'spin', component: SpinComponent },
