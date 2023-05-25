@@ -13,6 +13,10 @@ import { PinataComponent } from './inapps/pinata/pinata.component';
 import { SpinComponent2 } from './inapps/spin copy/spin-2.component';
 import { SpinGameComponent2 } from './inapps/spin copy/spin-game-2/spin-game-2.component';
 import { VideoComponent2 } from './inapps/video2/video.component';
+import { CodeValidatorComponent } from './views/code-validator/code-validator.component';
+
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,8 +31,9 @@ import { VideoComponent2 } from './inapps/video2/video.component';
     VideoComponent,
     VideoComponent2,
     PinataComponent,
+    CodeValidatorComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, FormsModule, HttpClientModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
 })

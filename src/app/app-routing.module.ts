@@ -10,6 +10,7 @@ import { PinataComponent } from './inapps/pinata/pinata.component';
 import { SpinComponent2 } from './inapps/spin copy/spin-2.component';
 import { SpinGameComponent2 } from './inapps/spin copy/spin-game-2/spin-game-2.component';
 import { VideoComponent2 } from './inapps/video2/video.component';
+import { CodeValidatorComponent } from './views/code-validator/code-validator.component';
 
 const routes: Routes = [
   { path: 'roulette', component: RouletteComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'spin2', component: SpinComponent2 },
   { path: 'spin2/game2', component: SpinGameComponent2 },
   { path: 'pinata', component: PinataComponent },
+  { path: 'codes', component: CodeValidatorComponent },
 
   // no layout views
   { path: '**', redirectTo: '/', pathMatch: 'full' },
