@@ -17,11 +17,13 @@ import { CodeValidatorComponent } from './views/code-validator/code-validator.co
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RouletteComponent1 } from './inapps/roulette1/roulette1.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RouletteComponent,
+    RouletteComponent1,
     SpinComponent,
     SpinComponent2,
     CatchingComponent,
